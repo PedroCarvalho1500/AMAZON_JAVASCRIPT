@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Projects</title>
+    <style>
+        #subscribe_button{
+            border: none;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border-radius: 21px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-weight: bold;
+            cursor:pointer;
+        }
+
+        #unsubscribe_button{
+            border: none;
+            background-color: rgba(138, 138, 138, 0.774);
+            color: rgb(0, 0, 0);
+            border-radius: 21px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            
+        }
+
+        .subscribed{
+            background: rgb(78, 77, 77);
+            color: azure;
+        }
+    </style>
+</head>
+<body>
+    <p>YouTube Subscribe Button</p>
+    <button class="unsubscribed" id="subscribe_button">Subscribe</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const subs_button = document.querySelector("#subscribe_button")
+            subs_button.onclick = () => {
+                if (subs_button.textContent === "Subscribe"){
+                    subs_button.innerText = 'Subscribed';
+                    subs_button.className = 'subscribed'
+                    subs_button.id = 'unsubscribe_button'
+                    //subs_button.classList.add('subscribed')
+                }else{
+                    subs_button.innerText = 'Subscribe';
+                    subs_button.className = 'unsubscribed'
+                    subs_button.id = 'subscribe_button'
+                    //subs_button.classList.remove('subscribed')
+                    
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

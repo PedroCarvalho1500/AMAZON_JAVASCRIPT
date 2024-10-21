@@ -1,0 +1,3 @@
+#Generate all HTML for the products using javascript instead of placing them one by one
+# When clicking on Add to Cart, sstem should show "added with a verified icon" under the product
+# Product must be sent to the cart

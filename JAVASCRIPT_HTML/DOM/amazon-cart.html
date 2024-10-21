@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Shipping Calculator</title>
+    <style>
+        #cost{
+            font-size: 15px;
+            padding: 10px;
+        }
+
+        #calc_btn{
+            background-color: rgb(13, 170, 13);
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="paragraphs">
+        <p>Amazon Shipping Calculator</p>
+        <p>Orders under $40 = +$10 shipping.</p>
+        <p>Orders over $40 = FREE shipping</p>
+    </div>
+
+    <div id="inputs">
+        <input id="cost" placeholder="Cost of order">
+        <button id="calc_btn">Calculate</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function genHexString(len) {
+            let output = '';
+            for (let i = 0; i < len; ++i) {
+                output += (Math.floor(Math.random() * 16)).toString(16);
+            }
+            return output;
+          }
+
+
+        const btn = document.querySelector('#calc_btn');
+        
+        btn.onclick = function(){
+            const price = parseFloat(document.querySelector('#cost').value)
+            document.querySelector('#cost').value = '';
+            console.log(price);
+
+            if(price < 40){
+                const final_value = `Total cost is ${price}`
+                document.querySelector("#result").innerHTML = final_value 
+                
+            }else{
+                const final_value = `Total cost is ${price+10}`
+                document.querySelector("#result").innerHTML = final_value 
+            }
+        }
+
+        document.addEventListener('click', (event) => {
+            let position = event.pageY
+            if (position > window.screen.height/2) {
+                document.body.style.background = '#'+genHexString(6)
+            }
+            console.log(position);
+        })
+    </script>
+</body>
+</html>
