@@ -3,7 +3,7 @@ import {updateCartNumberCheckout} from '../scripts/checkout/orderSummary.js'
 import {products} from '../data/products.js'
 
 if (!cart){
-  console.log("EMPTY");
+  //console.log("EMPTY");
   cart = [{
     
   }]
