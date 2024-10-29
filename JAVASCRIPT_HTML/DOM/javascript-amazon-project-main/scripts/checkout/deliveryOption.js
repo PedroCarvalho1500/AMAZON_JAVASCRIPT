@@ -16,7 +16,7 @@ export function calculateDeliveryDate(cart, order_div) {
     let delivery_options_html = ``;
     deliveryOptions.forEach((delivery_option) => {
         const priceString = delivery_option.priceCents === 0 ? `FREE Shipping` : `$${((delivery_option.priceCents) / 100).toFixed(2)}`
-        const delivery_date_day = isSatSun(today_date.add(delivery_option.deliveryDays, "days")) == false ? today_date.add(delivery_option.deliveryDays, "days").format('dddd') : nextDayNoWeekend(today_date,delivery_option.deliveryDays);
+        const delivery_date_day = nextDayNoWeekend(today_date,delivery_option.deliveryDays);
         const delivery_date_month = today_date.add(delivery_option.deliveryDays, "days").format('MMMM');
         const delivery_date_day_number = today_date.add(delivery_option.deliveryDays, "days").format('D');
         const isChecked = delivery_option.id === cart.deliveryOptionId ? `checked` : ``;
