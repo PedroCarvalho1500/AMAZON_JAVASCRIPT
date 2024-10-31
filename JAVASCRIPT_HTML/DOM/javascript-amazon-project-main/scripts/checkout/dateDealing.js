@@ -18,6 +18,6 @@ export function nextDayNoWeekend(date, days_to_add)
             
             
         }
-        console.log(`NEXT DAY NO WEEKEND: ${date}`);
+        //console.log(`NEXT DAY NO WEEKEND: ${date}`);
     return date.format('dddd');
 }

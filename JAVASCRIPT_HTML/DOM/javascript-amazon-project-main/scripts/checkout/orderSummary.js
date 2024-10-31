@@ -1,5 +1,6 @@
 import { cart, removeFromCart, saveToStorage, searchForProductWithinCart, updateCartProduct, removeFromCartFromCheckout } from '../../data/cart.js';
 import { products } from '../../data/products.js';
+import {formatCurrency} from '../utils/money.js'
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 import { total_quantity } from '../amazon.js';
 import { hello } from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'
@@ -110,6 +111,7 @@ export function changeSaveInputClasses(save_input) {
 
 export function organizeCart() {
     const today_date = dayjs();
+    console.log(cart.length);
     cart.forEach((item, index) => 
     {
         const orders_grid = document.querySelector('.order-summary');
@@ -290,6 +292,7 @@ export function cleanCart(){
 document.addEventListener('DOMContentLoaded', (event) => {
 
     if (event.target.title === "Checkout") {
+        console.log(formatCurrency(2065));
         //console.log(deliveryDate.format('dddd, MMMM, YYYY'));
         updateCartNumberCheckout();
         //organizeCart();

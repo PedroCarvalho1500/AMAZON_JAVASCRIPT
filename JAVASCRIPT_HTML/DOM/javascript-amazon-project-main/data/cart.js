@@ -2,14 +2,21 @@ import {updateCartNumber} from '../scripts/amazon.js'
 import {updateCartNumberCheckout} from '../scripts/checkout/orderSummary.js'
 import {products} from '../data/products.js'
 
-if (!cart){
-  //console.log("EMPTY");
-  cart = [{
-    
-  }]
+export var cart;
+
+loadFromStorage(); 
+
+export function loadFromStorage(){
+  cart = JSON.parse(localStorage.getItem('cart'));
+
+  if (!cart){
+    cart = []
+  }
 }
 
-export var cart = JSON.parse(localStorage.getItem('cart'));
+
+
+
 
 
 export function searchForProductInfo(productId){
@@ -34,7 +41,7 @@ export function updateCartProduct(productId,quantity){
 }
 
 
-export function addProductToCart(productId,quantity_selected,addedToCartDiv){
+export function addProductToCart(productId,quantity_selected){
     let matchingItem;
     cart.forEach((item) => {
       if(productId === item.productId){
@@ -55,7 +62,7 @@ export function addProductToCart(productId,quantity_selected,addedToCartDiv){
     }
   
     
-    cartIconAdded(addedToCartDiv);
+    //cartIconAdded(addedToCartDiv);
     saveToStorage()
   }
   
