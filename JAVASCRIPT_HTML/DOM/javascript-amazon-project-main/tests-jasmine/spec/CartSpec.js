@@ -1,5 +1,4 @@
-import { addProductToCart,cart,cartIconAdded,saveToStorage,removeFromCart,loadFromStorage } from '../../data/cart.js'
-
+import { addProductToCart,cart,cartIconAdded,saveToStorage,updateCartProduct,removeFromCart,loadFromStorage } from '../../data/cart.js'
 
 describe('Cart Test Scenarios: Function addProductToCart', () => 
 {
@@ -48,4 +47,52 @@ describe('Cart Test Scenarios: Function addProductToCart', () =>
         expect(cart[0].quantity).toEqual(2);
         expect(cart[0].deliveryOptionId).toEqual('1');
     });
+
+
+
+    it('Removing product from the cart',() => 
+    {
+            spyOn(localStorage, 'getItem').and.callFake(() => 
+            {
+                return JSON.stringify(
+                    [
+                        {
+                            productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+                            quantity: 1,
+                            deliveryOptionId: '1'
+                        }
+                    ]);
+            });
+            
+            spyOn(cart,'filter');
+            spyOn(localStorage, 'setItem');
+            loadFromStorage();
+            removeFromCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+            expect(cart.length).toEqual(0);
+    });
+
+
+    it('Update product quantity with a valid new value',() => 
+        {
+                spyOn(localStorage, 'getItem').and.callFake(() => 
+                {
+                    return JSON.stringify(
+                        [
+                            {
+                                productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+                                quantity: 1,
+                                deliveryOptionId: '1'
+                            }
+                        ]);
+                });
+                
+                spyOn(cart,'filter');
+                spyOn(localStorage, 'setItem');
+                loadFromStorage();
+                updateCartProduct('e43638ce-6aa0-4b85-b27f-e1d07eb678c6',3);
+                expect(cart[0].quantity).toEqual(3);
+        });
+
+    //updateCartProduct
+
 });

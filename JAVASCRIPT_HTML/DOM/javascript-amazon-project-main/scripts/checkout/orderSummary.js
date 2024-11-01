@@ -1,4 +1,4 @@
-import { cart, removeFromCart, saveToStorage, searchForProductWithinCart, updateCartProduct, removeFromCartFromCheckout } from '../../data/cart.js';
+import { cart, removeFromCart, saveToStorage, searchForProductWithinCart,removeContainerFromCart, updateCartProduct, removeFromCartFromCheckout } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js'
 import { deliveryOptions } from '../../data/deliveryOptions.js';
@@ -196,7 +196,9 @@ export function organizeCart() {
 
     document.querySelectorAll('.delete-quantity-link').forEach((link, index) => {
         link.addEventListener('click', () => {
+            removeContainerFromCart(link.dataset.productId);
             removeFromCartFromCheckout(link.dataset.productId);
+            saveToStorage()
             updateCartNumberCheckout();
             cleanCart()
             renderPaymentSummary()

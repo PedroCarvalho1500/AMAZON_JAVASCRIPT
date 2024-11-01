@@ -82,10 +82,16 @@ export function cartIconAdded(addedToCartDiv){
   }
 
 
-export function removeFromCart(productId){
+export function removeContainerFromCart(productId){
   const product_to_delete = cart.filter((item) => {if (item.productId === productId) {return true} else{false}});
+  console.log(product_to_delete)
   const container = document.querySelector(`.js-cart-item-container-${product_to_delete[0].productId}`)
   container.remove();
+}
+
+
+export function removeFromCart(productId){
+  const product_to_delete = cart.filter((item) => {if (item.productId === productId) {return true} else{false}});
   let newCart = []
   cart.forEach((item) => {
     if(item.productId !== product_to_delete[0].productId){
@@ -101,17 +107,13 @@ export function removeFromCart(productId){
 
 export function removeFromCartFromCheckout(productId){
   const product_to_delete = cart.filter((item) => {if (item.productId === productId) {return true} else{false}});
-  const container = document.querySelector(`.js-cart-item-container-${product_to_delete[0].productId}`)
-  container.remove();
   let newCart = []
   cart.forEach((item) => {
     if(item.productId !== product_to_delete[0].productId){
       newCart.push(item);
-      updateCartNumberCheckout();
     }
   });
 
   cart = newCart;
-  saveToStorage();
 }
 
