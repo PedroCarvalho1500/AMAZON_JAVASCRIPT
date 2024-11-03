@@ -34,6 +34,7 @@ describe('Test Set: organizeCart', () =>
         expect(document.querySelectorAll('.cart-item-container').length).toEqual(2);
         expect(document.querySelector(`.quantity-product-${productId1}`).innerText).toContain(`Quantity: 1`);
         expect(document.querySelector(`.quantity-product-${productId2}`).innerText).toContain(`Quantity: 3`);
+        document.querySelector('.js-test-container').innerHTML = ``;
     });
 
     it('Removes a product from the cart', () => 
@@ -62,6 +63,7 @@ describe('Test Set: organizeCart', () =>
                         }
                     ]);
         });
+        spyOn(localStorage, 'setItem');
         loadFromStorage();
         organizeCart();
         document.querySelectorAll(`.delete-quantity-link`)[0].click();
@@ -71,5 +73,7 @@ describe('Test Set: organizeCart', () =>
         expect(document.querySelector(`.quantity-product-${productId2}`)).not.toEqual(null);
         expect(cart.length).toEqual(1);
         expect(cart[0].productId).toEqual(productId2);
+        document.querySelector('.js-test-container').innerHTML = ``;
+
     })
 })
