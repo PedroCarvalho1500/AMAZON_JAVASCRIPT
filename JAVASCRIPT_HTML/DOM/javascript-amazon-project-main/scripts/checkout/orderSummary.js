@@ -111,7 +111,7 @@ export function changeSaveInputClasses(save_input) {
 
 export function organizeCart() {
     const today_date = dayjs();
-    console.log(cart.length);
+    //console.log(cart.length);
     cart.forEach((item, index) => 
     {
         const orders_grid = document.querySelector('.order-summary');
@@ -149,8 +149,7 @@ export function organizeCart() {
             $${(product_added_to_cart[0].priceCents / 100).toFixed(2)}
           </div>
           <div class="product-quantity-${cart[index].productId}">
-            <span class="quantity_value quantity-product-${cart[index].productId}">
-              Quantity: ${cart[index].quantity} 
+            <span class="quantity_value quantity-product-${cart[index].productId}"> Quantity: ${cart[index].quantity} 
             </span>
             <span class="update-quantity-link link-primary js-update-link" data-product-id="${cart[index].productId}">
               Update
