@@ -93,15 +93,24 @@ export function removeContainerFromCart(productId){
 export function removeFromCart(productId){
   const product_to_delete = cart.filter((item) => {if (item.productId === productId) {return true} else{false}});
   let newCart = []
-  cart.forEach((item) => {
-    if(item.productId !== product_to_delete[0].productId){
-      newCart.push(item);
-      updateCartNumberCheckout();
-      updateCartNumber()
-    }
-  });
+  
+  if (product_to_delete.length !== 0) 
+  {
+    cart.forEach((item) => {
+      if(item.productId !== product_to_delete[0].productId){
+        newCart.push(item);
+        updateCartNumberCheckout();
+        updateCartNumber()
+      }
+    });
+  }else
+  {
+    newCart = cart;
+  }
+
 
   cart = newCart;
+  saveToStorage()
 }
 
 

@@ -40,6 +40,10 @@ describe('Test Set: organizeCart', () =>
         expect(document.querySelectorAll('.cart-item-container').length).toEqual(2);
         expect(document.querySelector(`.quantity-product-${productId1}`).innerText).toContain(`Quantity: 1`);
         expect(document.querySelector(`.quantity-product-${productId2}`).innerText).toContain(`Quantity: 3`);
+        expect(document.querySelectorAll('.product-name')[0].innerText).toContain(`Black and Gray Athletic Cotton Socks - 6 Pairs`);
+        expect(document.querySelectorAll('.product-name')[1].innerText).toContain(`Intermediate Size Basketball`);
+        expect(document.querySelectorAll('.product-price')[0].innerText).toEqual(`$10.90`);
+        expect(document.querySelectorAll('.product-price')[1].innerText).toEqual(`$20.95`);
     });
 
     it('Removes a product from the cart', () => 
