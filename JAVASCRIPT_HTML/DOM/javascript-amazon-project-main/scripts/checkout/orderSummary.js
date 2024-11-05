@@ -164,7 +164,6 @@ export function organizeCart() {
           <div class="delivery-options-title">
             Choose a delivery option:
           </div>
-
           ${calculateDeliveryDate(cart[index], order_div)}
         </div>
 

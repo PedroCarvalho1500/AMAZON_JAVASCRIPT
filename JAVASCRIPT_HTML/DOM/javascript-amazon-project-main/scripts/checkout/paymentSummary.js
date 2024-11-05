@@ -30,7 +30,7 @@ export function renderPaymentSummary(){
             <div class="payment-summary-money">$${total_item_value}</div>
           </div>
 
-          <div class="payment-summary-row">
+          <div class="payment-summary-row shipping-row">
             <div>Shipping &amp; handling:</div>
             <div class="payment-summary-money">$${total_delivery_cost}</div>
           </div>
@@ -61,7 +61,10 @@ export function renderPaymentSummary(){
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
+  if (event.target.title === "Checkout")
+  {
 
+  }
 
 
 })

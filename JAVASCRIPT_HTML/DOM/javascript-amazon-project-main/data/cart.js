@@ -41,6 +41,27 @@ export function updateCartProduct(productId,quantity){
 }
 
 
+export function updateDeliveryOption(productId,deliveryOption)
+{
+  if(searchForProductInfo(productId).length > 0)
+  {
+    cart.forEach((item) => 
+    {
+      if(item.productId == productId)
+      {
+        item.deliveryOptionId = deliveryOption;
+      }
+    });
+    saveToStorage();
+  }
+  else
+  {
+    return
+  }
+
+}
+
+
 export function addProductToCart(productId,quantity_selected){
     let matchingItem;
     cart.forEach((item) => {
@@ -84,7 +105,7 @@ export function cartIconAdded(addedToCartDiv){
 
 export function removeContainerFromCart(productId){
   const product_to_delete = cart.filter((item) => {if (item.productId === productId) {return true} else{false}});
-  console.log(product_to_delete)
+  //console.log(product_to_delete)
   const container = document.querySelector(`.js-cart-item-container-${product_to_delete[0].productId}`)
   container.remove();
 }

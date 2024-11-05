@@ -28,7 +28,7 @@ export function calculateDeliveryDate(cart, order_div) {
        <div class="delivery-option-date">
          ${delivery_date_day}, ${delivery_date_month} ${delivery_date_day_number}
        </div>
-       <div class="delivery-option-price">
+       <div class="delivery-option-price-${cart.productId}">
          ${priceString} - Shipping
        </div>
      </div>
