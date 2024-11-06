@@ -1,5 +1,6 @@
 import { cart, addProductToCart, cartIconAdded, saveToStorage } from '../data/cart.js';
 import { products } from '../data/products.js'
+import {cart1} from '../data/cart-class.js'
 
 export var total_quantity = 0
 
@@ -10,7 +11,7 @@ export function updateCartNumber() {
   let cart_quantity = document.querySelector('.cart-quantity');
   if (cart.length === 0) {
     cart_quantity.textContent = ""
-    console.log("0");
+    //console.log("0");
   } else {
     total_quantity = Object.keys(cart).map((key) => cart[key].quantity).reduce((acumulator, currentValue) => acumulator + currentValue);
     cart_quantity.textContent = total_quantity;
@@ -19,6 +20,19 @@ export function updateCartNumber() {
 
   return total_quantity
 
+}
+
+export function updateCartNumberOO(cart){
+  let cart_quantity = document.querySelector('.cart-quantity-2');
+  if (cart.cartItems.length === 0) {
+    cart_quantity.textContent = ""
+    //console.log("0");
+  } else {
+    total_quantity = Object.keys(cart.cartItems).map((key) => cart.cartItems[key].quantity).reduce((acumulator, currentValue) => acumulator + currentValue);
+    cart_quantity.textContent = total_quantity;
+  }
+
+  return total_quantity
 }
 
 
@@ -80,10 +94,17 @@ function organizeProducts() {
     products_grid.appendChild(product_div)
   });
 }
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => 
   {
     if(event.target.title === "Amazon Project"){
       organizeProducts();
+      updateCartNumberOO(cart1);
 
       document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
         button.addEventListener('click', () => {
