@@ -1,5 +1,5 @@
 import { cart, addProductToCart, cartIconAdded, saveToStorage } from '../data/cart.js';
-import { products } from '../data/products.js'
+import { products,productsOO } from '../data/products.js'
 import {cart1} from '../data/cart-class.js'
 
 export var total_quantity = 0

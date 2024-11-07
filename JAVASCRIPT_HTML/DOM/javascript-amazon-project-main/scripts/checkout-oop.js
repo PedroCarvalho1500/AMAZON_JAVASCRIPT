@@ -3,5 +3,4 @@ import {renderPaymentSummary,renderPaymentSummaryOO} from '../scripts/checkout/p
 import {cart1,Cart} from '../data/cart-class.js'
 
 organizeCartOO(cart1);
-renderPaymentSummaryOO(cart1);
 //console.log(cart1 instanceof Cart)

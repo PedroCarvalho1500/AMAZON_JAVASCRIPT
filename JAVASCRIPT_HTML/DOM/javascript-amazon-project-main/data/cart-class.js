@@ -3,11 +3,18 @@ import { updateCartNumberCheckout } from '../scripts/checkout/orderSummary.js'
 import { products } from './products.js'
 
 export class Cart {
-    cartItems = undefined;
-    addedMessageTimeout = undefined;
-    localStorageKey = undefined;
+    
+    cartItems;
+    addedMessageTimeout;
+    #localStorageKey;
 
-    loadFromStorage() {
+    constructor(localStorageKey){
+        this.#localStorageKey = localStorageKey;
+        this.saveToStorage();
+        this.#loadFromStorage();
+    }
+
+    #loadFromStorage() {
 
         if (!this.cartItems) {
             this.cartItems =
@@ -26,12 +33,12 @@ export class Cart {
         }
 
         this.saveToStorage();
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     }
 
     saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
 
@@ -141,9 +148,4 @@ export class Cart {
 
 
 
-export const cart1 = new Cart();
-cart1.localStorageKey = "cart-class1"
-
-cart1.saveToStorage();
-cart1.loadFromStorage();
-//console.log(cart1.cartItems);
+export const cart1 = new Cart("cart-class1");
