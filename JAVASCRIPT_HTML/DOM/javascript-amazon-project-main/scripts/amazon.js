@@ -40,7 +40,10 @@ function organizeProducts() {
   const products_grid = document.querySelector('.products-grid');
   let product_div;
   updateCartNumber();
-  products.forEach((element) => {
+
+  //productsOO
+  productsOO.forEach((element) => {
+  //products.forEach((element) => {
     element.rating.stars = parseFloat(String(element.rating.stars).replace(".", ""));
     //element.priceCents = Math.round(parseFloat(element.priceCents/100),2)
     //console.log(element.priceCents)
@@ -64,7 +67,7 @@ function organizeProducts() {
               </div>
     
               <div class="product-price">
-                $${(element.priceCents / 100).toFixed(2)}
+                ${element.getPrice()}
               </div>
     
               <div class="product-quantity-container">
@@ -88,6 +91,7 @@ function organizeProducts() {
                 <img src="images/icons/checkmark.png">
                 Added
               </div>
+              ${element.extraInfoHtml()}
               <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${element.id}">
                 Add to Cart
               </button>`

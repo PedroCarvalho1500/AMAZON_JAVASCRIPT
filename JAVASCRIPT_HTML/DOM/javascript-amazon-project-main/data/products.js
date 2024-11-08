@@ -12,6 +12,18 @@ class Product{
         this.priceCents = productDetails.priceCents;
     }
 
+    getStarsUrl(){
+      return `images/ratings/rating-${this.rating.stars}.png`
+    }
+
+    getPrice(){
+      return `$${(this.priceCents/100).toFixed(2)}`
+    }
+
+    extraInfoHtml(){
+      return ``;
+    }
+
 }
 
 // const product1 = new Product({
@@ -712,10 +724,99 @@ export const products = [
 ];
 
 
+class Clothing extends Product{
+  sizeChartLink;
+  type;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+    this.type = productDetails.type
+  }
+
+
+  extraInfoHtml(){
+    //POLYMORPHISM - WE CAN USE A METHOD WITHOUT KNOWING THE CLASS
+    //CALL PARENT'S METHOD
+    //super.extraInfoHtml()
+    return `
+    <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
+    `
+  }
+}
+
+
+
+const date = new Date();
+console.log(date);
+date.toLocaleTimeString();
+console.log(date);
+
+/*
+const object2 = {
+  a: 2,
+  b: this.a
+}*/
+
+// function logThis(){
+//   console.log(this);
+// }
+
+// logThis();
+// logThis.call("HELLO");
+
+// //ARROW FUNCTIONS DON'T CHANGE THE VALUE OF THIS
+// const object3 = {
+//   method: () => {
+//     console.log(`OBJECT ${this}`);
+//   }
+// }
+
+// object3.method();
+
+
+
+
+const tshirt = new Clothing({
+  id: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
+  image: "images/products/men-golf-polo-t-shirt-blue.jpg",
+  name: "Men's Regular-Fit Quick-Dry Golf Polo Shirt",
+  rating: {
+    stars: 4.5,
+    count: 2556
+  },
+  priceCents: 1599,
+  keywords: [
+    "tshirts",
+    "shirts",
+    "apparel",
+    "mens"
+  ],
+  type: "clothing",
+  sizeChartLink: "images/clothing-size-chart.png"
+});
+
+//console.log(tshirt.getPrice());
+//console.log(tshirt.getStarsUrl());
+console.log(tshirt.type)
 
 export const productsOO = products.map((productDetails) => {
   //console.log(productDetails);
-  return new Product(productDetails);
+  //console.log(productDetails.rating.stars);
+  if (productDetails.type === "clothing")
+    {
+      return new Clothing(productDetails);
+    }
+  else
+  {
+    return new Product(productDetails);
+  }
+  
 });
 
+// console.log(productsOO.filter((product) => {
+//   if (product.type === "clothing"){return true}
+//   else{return false}
+// }))
+//console.log(productsOO[4].getPrice())
 
