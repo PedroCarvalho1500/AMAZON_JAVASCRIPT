@@ -8,6 +8,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import {renderPaymentSummary} from '../checkout/paymentSummary.js'
 import {isSatSun} from '../checkout/dateDealing.js'
 import {calculateDeliveryDate} from '../checkout/deliveryOption.js'
+import '../../data/car.js'
 
 // const today_date = dayjs();
 // const deliveryDate1 = today_date.add(7,"days").format('dddd, MMMM, D');
@@ -378,7 +379,7 @@ export function cleanCart(){
 document.addEventListener('DOMContentLoaded', (event) => {
 
     if (event.target.title === "Checkout") {
-        console.log(formatCurrency(2065));
+        //console.log(formatCurrency(2065));
         //console.log(deliveryDate.format('dddd, MMMM, YYYY'));
         updateCartNumberCheckout();
         //organizeCart();

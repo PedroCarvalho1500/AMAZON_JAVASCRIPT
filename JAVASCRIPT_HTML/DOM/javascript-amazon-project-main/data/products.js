@@ -1,4 +1,4 @@
-class Product{
+export class Product{
     id;
     image;
     name;
@@ -106,7 +106,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -724,7 +727,7 @@ export const products = [
 ];
 
 
-class Clothing extends Product{
+export class Clothing extends Product{
   sizeChartLink;
   type;
 
@@ -739,18 +742,34 @@ class Clothing extends Product{
     //POLYMORPHISM - WE CAN USE A METHOD WITHOUT KNOWING THE CLASS
     //CALL PARENT'S METHOD
     //super.extraInfoHtml()
-    return `
-    <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
-    `
+    return `<a href="${this.sizeChartLink}" target="_blank">Size chart</a>`
   }
 }
 
+export class Appliance extends Product{
+  instructionsLink;
+  warrantyLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink
+  }
+
+  extraInfoHtml(){
+    //POLYMORPHISM - WE CAN USE A METHOD WITHOUT KNOWING THE CLASS
+    //CALL PARENT'S METHOD
+    //super.extraInfoHtml()
+    return `<a href="${this.instructionsLink}" target="_blank">Instructions</a>\n<a href="${this.warrantyLink}" target="_blank">Warranty</a>`
+  }
+
+}
 
 
-const date = new Date();
-console.log(date);
-date.toLocaleTimeString();
-console.log(date);
+// const date = new Date();
+// console.log(date);
+// date.toLocaleTimeString();
+// console.log(date);
 
 /*
 const object2 = {
@@ -798,15 +817,19 @@ const tshirt = new Clothing({
 
 //console.log(tshirt.getPrice());
 //console.log(tshirt.getStarsUrl());
-console.log(tshirt.type)
+//console.log(tshirt.type)
 
 export const productsOO = products.map((productDetails) => {
   //console.log(productDetails);
   //console.log(productDetails.rating.stars);
   if (productDetails.type === "clothing")
-    {
-      return new Clothing(productDetails);
-    }
+  {
+    return new Clothing(productDetails);
+  }
+  else if(productDetails.type === "appliance")
+  {
+    return new Appliance(productDetails);
+  }
   else
   {
     return new Product(productDetails);
