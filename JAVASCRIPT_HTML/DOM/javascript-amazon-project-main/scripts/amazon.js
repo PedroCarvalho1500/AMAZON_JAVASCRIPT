@@ -1,5 +1,5 @@
 import { cart, addProductToCart, cartIconAdded, saveToStorage } from '../data/cart.js';
-import { products,productsOO } from '../data/products.js'
+import { products,productsOO,loadProducts,products_from_backend } from '../data/products.js'
 import {cart1} from '../data/cart-class.js'
 
 export var total_quantity = 0
@@ -36,13 +36,16 @@ export function updateCartNumberOO(cart){
 }
 
 
-function organizeProducts() {
+export function organizeProducts(products_from_backend) {
   const products_grid = document.querySelector('.products-grid');
   let product_div;
   updateCartNumber();
-
+  //console.log(productsOO);
   //productsOO
-  productsOO.forEach((element) => {
+
+  products_from_backend.forEach((element) => {
+
+  //productsOO.forEach((element) => {
   //products.forEach((element) => {
     element.rating.stars = parseFloat(String(element.rating.stars).replace(".", ""));
     //element.priceCents = Math.round(parseFloat(element.priceCents/100),2)
@@ -97,6 +100,25 @@ function organizeProducts() {
               </button>`
     products_grid.appendChild(product_div)
   });
+
+  document.querySelectorAll('.js-add-to-cart').forEach((button, index) => 
+    {
+      button.addEventListener('click', () => {
+        console.log("CLICKED...")
+        var addedToCartDiv = document.querySelectorAll('.added-to-cart')[index];
+        cartIconAdded(addedToCartDiv);
+
+        var selected_value = document.querySelector(`#quantity-selector-${products[index].id}`);
+
+        const quantity_selected = parseInt(selected_value.value);
+        const productId = button.dataset.productId;
+
+        addProductToCart(productId, quantity_selected, addedToCartDiv);
+        //console.log(cart);
+        updateCartNumber();
+        saveToStorage();
+      })
+    });
 }
 
 
@@ -107,26 +129,28 @@ function organizeProducts() {
 document.addEventListener('DOMContentLoaded', (event) => 
   {
     if(event.target.title === "Amazon Project"){
-      organizeProducts();
+      loadProducts(organizeProducts);
+      //organizeProducts();
       updateCartNumberOO(cart1);
 
-      document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
-        button.addEventListener('click', () => {
-          //console.log("CLICKED...")
-          var addedToCartDiv = document.querySelectorAll('.added-to-cart')[index];
-          cartIconAdded(addedToCartDiv);
+      // document.querySelectorAll('.js-add-to-cart').forEach((button, index) => 
+      // {
+      //   button.addEventListener('click', () => {
+      //     console.log("CLICKED...")
+      //     var addedToCartDiv = document.querySelectorAll('.added-to-cart')[index];
+      //     cartIconAdded(addedToCartDiv);
   
-          var selected_value = document.querySelector(`#quantity-selector-${products[index].id}`);
+      //     var selected_value = document.querySelector(`#quantity-selector-${products[index].id}`);
   
-          const quantity_selected = parseInt(selected_value.value);
-          const productId = button.dataset.productId;
+      //     const quantity_selected = parseInt(selected_value.value);
+      //     const productId = button.dataset.productId;
   
-          addProductToCart(productId, quantity_selected, addedToCartDiv);
-          //console.log(cart);
-          updateCartNumber();
-          saveToStorage();
-        })
-      });
+      //     addProductToCart(productId, quantity_selected, addedToCartDiv);
+      //     //console.log(cart);
+      //     updateCartNumber();
+      //     saveToStorage();
+      //   })
+      // });
     }
   });
 

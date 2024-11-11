@@ -85,18 +85,20 @@ const raceCar1 = new RaceCar('McLaren','F1',20);
 
 //const raceCar3 = new RaceCar()
 
-console.log(car1.displayInfo());
-car1.openTrunk();
-console.log(car1.displayInfo());
-car1.go();
-console.log(car1.displayInfo());
-car1.brake();
-car1.closeTrunk();
-car1.go();
-console.log(car1.displayInfo());
-console.log(raceCar1.displayInfo());
-console.log(raceCar1.acceleration);
-for(let i=0;i<10;i++){
-    raceCar1.go();
-}
-console.log(raceCar1.displayInfo());
+
+//REMOVE THE COMMENTS BELOW TO SHOW THE CAR INFORMATION  
+// console.log(car1.displayInfo());
+// car1.openTrunk();
+// console.log(car1.displayInfo());
+// car1.go();
+// console.log(car1.displayInfo());
+// car1.brake();
+// car1.closeTrunk();
+// car1.go();
+// console.log(car1.displayInfo());
+// console.log(raceCar1.displayInfo());
+// console.log(raceCar1.acceleration);
+// for(let i=0;i<10;i++){
+//     raceCar1.go();
+// }
+// console.log(raceCar1.displayInfo());

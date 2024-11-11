@@ -819,23 +819,78 @@ const tshirt = new Clothing({
 //console.log(tshirt.getStarsUrl());
 //console.log(tshirt.type)
 
-export const productsOO = products.map((productDetails) => {
-  //console.log(productDetails);
-  //console.log(productDetails.rating.stars);
-  if (productDetails.type === "clothing")
+export let products_from_backend = [];
+
+export function loadProducts(fun){
+  console.log("Starting loadProducts function")
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET','https://supersimplebackend.dev/products');
+  xhr.send();
+
+  xhr.addEventListener('loadend', () => 
   {
-    return new Clothing(productDetails);
-  }
-  else if(productDetails.type === "appliance")
-  {
-    return new Appliance(productDetails);
-  }
-  else
-  {
-    return new Product(productDetails);
-  }
+      //console.log(`SENT!`);
+      products_from_backend = JSON.parse(xhr.response).map((productDetails) => 
+      {
+        if (productDetails.type === "clothing")
+        {
+          return new Clothing(productDetails);
+        }
+        else if(productDetails.type === "appliance")
+        {
+          return new Appliance(productDetails);
+        }
+        else
+        {
+          return new Product(productDetails);
+        }
+      })
+      //console.log(products_from_backend);
+      fun(products_from_backend);
+  })
+
   
-});
+}
+
+
+
+export function loadCart(fun){
+  console.log("Starting loadCart function")
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET','https://supersimplebackend.dev/cart');
+  xhr.send();
+
+  xhr.addEventListener('loadend', () => 
+  {
+      console.log(xhr.response);
+      fun();
+  })
+
+
+  
+}
+
+
+export let productsOO = []
+
+// export let productsOO = products.map((productDetails) => {
+//   //console.log(productDetails);
+//   //console.log(productDetails.rating.stars);
+//   if (productDetails.type === "clothing")
+//   {
+//     return new Clothing(productDetails);
+//   }
+//   else if(productDetails.type === "appliance")
+//   {
+//     return new Appliance(productDetails);
+//   }
+//   else
+//   {
+//     return new Product(productDetails);
+//   }
+  
+// });
+
 
 // console.log(productsOO.filter((product) => {
 //   if (product.type === "clothing"){return true}
