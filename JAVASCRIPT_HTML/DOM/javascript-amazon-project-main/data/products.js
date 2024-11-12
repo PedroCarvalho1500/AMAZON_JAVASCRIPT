@@ -821,16 +821,16 @@ const tshirt = new Clothing({
 
 export let products_from_backend = [];
 
-export function loadProducts(fun){
+export function loadProducts(){
   console.log("Starting loadProducts function")
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET','https://supersimplebackend.dev/products');
-  xhr.send();
-
-  xhr.addEventListener('loadend', () => 
+  const promise1 = fetch("https://supersimplebackend.dev/products")
+  .then((response,error) => 
   {
-      //console.log(`SENT!`);
-      products_from_backend = JSON.parse(xhr.response).map((productDetails) => 
+    return response.json();
+  }).then((productsData) => 
+    {
+      //console.log(productsData);
+      products_from_backend = productsData.map((productDetails) => 
       {
         if (productDetails.type === "clothing")
         {
@@ -844,13 +844,43 @@ export function loadProducts(fun){
         {
           return new Product(productDetails);
         }
-      })
-      //console.log(products_from_backend);
-      fun(products_from_backend);
-  })
+      });
+      return productsData;
+    }); 
+  return promise1;
+}
+
+
+// export function loadProducts(fun){
+//   console.log("Starting loadProducts function")
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET','https://supersimplebackend.dev/products');
+//   xhr.send();
+
+//   xhr.addEventListener('loadend', () => 
+//   {
+//       //console.log(`SENT!`);
+//       products_from_backend = JSON.parse(xhr.response).map((productDetails) => 
+//       {
+//         if (productDetails.type === "clothing")
+//         {
+//           return new Clothing(productDetails);
+//         }
+//         else if(productDetails.type === "appliance")
+//         {
+//           return new Appliance(productDetails);
+//         }
+//         else
+//         {
+//           return new Product(productDetails);
+//         }
+//       })
+//       //console.log(products_from_backend);
+//       fun(products_from_backend);
+//   })
 
   
-}
+// }
 
 
 
@@ -866,8 +896,6 @@ export function loadCart(fun){
       fun();
   })
 
-
-  
 }
 
 

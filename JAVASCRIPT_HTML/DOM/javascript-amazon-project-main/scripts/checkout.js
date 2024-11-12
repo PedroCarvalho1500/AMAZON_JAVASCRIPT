@@ -5,6 +5,29 @@ import {renderPaymentSummary} from '../scripts/checkout/paymentSummary.js'
 import { loadProducts,loadCart } from '../data/products.js';
 
 
+// Promise.all([
+//     new Promise((resolve) => {
+//         console.log('promise start loadProducts');
+//         loadProducts(() => {
+//             console.log('Finished loadProducts function...');
+//             console.log(`RESPONSE ${response}`);
+//             resolve("VALUE")
+//         });
+//     }),
+//     new Promise((resolve) => {
+//         console.log('promise start loadCart');
+//         loadCart(() => {
+//             organizeCart();
+//             renderPaymentSummary();
+//             resolve('Value 2');
+//         })
+//     }).then((value) => {
+        
+//     })
+// ]).then((values) => {
+//     console.log("END VALUE")
+// })
+
 //Running one promise each time
 // new Promise((resolve) => {
 //     console.log('promise start loadProducts');
@@ -29,26 +52,38 @@ import { loadProducts,loadCart } from '../data/products.js';
 
 //PROMISES HELP US AVOID NESTING. SO OUR CODE KEEPS NEAT
 //Running several promises at the same time (In parallel) using Promise.all
-Promise.all([
-    new Promise((resolve) => {
-        console.log('promise start loadProducts');
-        loadProducts(() => {
-            console.log('Finished loadProducts function...');
-            resolve("Value 1");
-        });
-    }),
-    new Promise((resolve) => {
-        console.log('promise start loadCart');
+
+// THIS IS A SHORTER VERSION OF THE CODE BELOW
+async function loadPage()
+{
+    console.log('load page...');
+
+    // WE CAN ONLY USE AWAIT WHEN WE'RE INSIDE AN ASYNC FUNCTION
+    await loadProducts();
+    const resolver = await new Promise((resolve) => {
         loadCart(() => {
-            console.log('Finished loadCart function...');
-            resolve("Value 2");  
+            resolve("FINISHED loadCart");
         })
-    })
-]).then((values) => {
-    console.log(`PROMISES VALUES: ${values[0]} ${values[1]}`);
+    });
+    console.log(`RESOLVER ${resolver}`);
+
     organizeCart();
     renderPaymentSummary();
+    return "loadPage Finished";
+}
+
+await loadPage().then((value) => {
+    console.log(`${value}`);
 })
+
+// function loadPage(){
+//     return new Promise((resolve) => {
+//         console.log(resolve);
+//         resolve();
+//     })
+// }
+
+
 
 /*
 loadProducts(() => {

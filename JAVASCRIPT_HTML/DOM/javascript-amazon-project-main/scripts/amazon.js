@@ -129,7 +129,10 @@ export function organizeProducts(products_from_backend) {
 document.addEventListener('DOMContentLoaded', (event) => 
   {
     if(event.target.title === "Amazon Project"){
-      loadProducts(organizeProducts);
+      //loadProducts(organizeProducts);
+      loadProducts().then(() => {
+        organizeProducts(products_from_backend);
+      })
       //organizeProducts();
       updateCartNumberOO(cart1);
 

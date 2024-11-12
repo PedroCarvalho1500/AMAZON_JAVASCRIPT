@@ -1,23 +1,23 @@
-// const p1 = new Promise((resolve) => {
-//     console.log("PROMISE 1...")
-//     setTimeout(() => {
-//         console.log('The first promise has resolved');
-//         resolve(10);
-//       }, 1 * 1000);
-//     });
+const p1 = new Promise((resolve) => {
+    console.log("PROMISE 1...")
+    setTimeout(() => {
+        console.log('The first promise has resolved');
+        resolve(10);
+      }, 1 * 1000);
+    });
 
-// const p2 = new Promise((resolve) => {
-//     console.log("PROMISE 2...")
-//     resolve(30);
-// })
+const p2 = new Promise((resolve) => {
+    console.log("PROMISE 2...")
+    resolve(30);
+})
 
-// Promise.all([
-//     p1,
-//     p2
-// ]).then((results) => {
-//     console.log("RESULTS...");
-//     console.log(results);
-// })
+Promise.all([
+    p1,
+    p2
+]).then((results) => {
+    console.log("RESULTS...");
+    console.log(results);
+})
 
 
 
