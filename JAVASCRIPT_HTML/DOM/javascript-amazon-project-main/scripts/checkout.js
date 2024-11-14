@@ -54,23 +54,27 @@ import { loadProducts,loadCart } from '../data/products.js';
 //Running several promises at the same time (In parallel) using Promise.all
 
 // THIS IS A SHORTER VERSION OF THE CODE BELOW
-async function loadPage()
-{
-    console.log('load page...');
 
-    // WE CAN ONLY USE AWAIT WHEN WE'RE INSIDE AN ASYNC FUNCTION
-    await loadProducts();
-    const resolver = await new Promise((resolve) => {
-        loadCart(() => {
-            resolve("FINISHED loadCart");
-        })
-    });
-    console.log(`RESOLVER ${resolver}`);
+    async function loadPage()
+    {
+        console.log('load page...');
 
-    organizeCart();
-    renderPaymentSummary();
-    return "loadPage Finished";
-}
+        // WE CAN ONLY USE AWAIT WHEN WE'RE INSIDE AN ASYNC FUNCTION
+        await loadProducts();
+        const resolver = await new Promise((resolve,reject) => {
+            loadCart(() => {
+                //reject('ERROR 1')
+                resolve("FINISHED loadCart");
+                
+            })
+        });
+        console.log(`RESOLVER ${resolver}`);
+
+        organizeCart();
+        renderPaymentSummary();
+        return "loadPage Finished";
+    }
+
 
 await loadPage().then((value) => {
     console.log(`${value}`);

@@ -846,6 +846,8 @@ export function loadProducts(){
         }
       });
       return productsData;
+    }).catch((error) => {
+      console.log(`SOMETHING WENT WRONG...`)
     }); 
   return promise1;
 }
@@ -894,6 +896,10 @@ export function loadCart(fun){
   {
       console.log(xhr.response);
       fun();
+  });
+
+  xhr.addEventListener('error', () => {
+    console.log("UNEXPECTED ERROR!!!");
   })
 
 }

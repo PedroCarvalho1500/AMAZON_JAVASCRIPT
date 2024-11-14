@@ -74,7 +74,7 @@ Promise.all
     ]).then()
     {
         const div_container = document.createElement('div');
-        div_container.innerText = `COMMAND 1\n COMMAND 2\n COMMAND 3\n COMMAND 4`
+        div_container.innerText = `COMMAND 1\n COMMAND 2\n COMMAND 3\n COMMAND 4`;
         document.querySelector('.js-test-container').appendChild(div_container);
     }
 
