@@ -48,29 +48,70 @@ export async function greetingThroughFetchWithAsync()
 }
 
 
+export async function greetingPostFetch(name)
+{
+    console.log(`Greeting Post request starting...`);
+    const greeting = await fetch('https://supersimplebackend.dev/greeting', 
+        {
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: `${name}`})
+        }).catch((error) => 
+        {
+            console.log(`AN UNEXPECTED ERROR OCCURRED!!!`)
+        });
+    console.log(await greeting.text());
+    console.log(`Finished Post Greeting Through Fetch with Async`);
+    return greeting;
+}
+
+
+
+export async function getToAmazonFetchAsync()
+{
+    console.log(`Amazon URL starting...`);
+    const amazon_url = await fetch('https://amazon.com',{method: 'GET'})
+    .catch((error) => 
+        {
+            console.log(`CORS error. Your request was blocked by the backend ${error}`)
+        });
+
+    console.log(`Finished Amazon URL starting...`);
+    return amazon_url;
+}
+
+
+
+export async function greetingPostError()
+{
+    console.log(`Greeting Post request starting...`);
+    try
+    {
+        const greeting = await fetch('https://supersimplebackend.dev/greeting', 
+            {
+            method: 'POST', 
+            headers: {'Content-Type': 'application/json'}
+            });
+
+            if(greeting.status >= 400)
+            {
+                throw greeting;
+            }
+    }catch(error){
+        if (error.status === 400) {
+            const errorMessage = await error.json();
+            console.log(errorMessage);
+          } else {
+            console.log('Network error. Please try again later.');
+          }
+    } 
+}
+
+
 
 greetingThroughXML();
 greetingThroughFetchWithoutAsync();
 greetingThroughFetchWithAsync();
-
-
-// document.querySelector(`.js-place-order`).addEventListener("click", async () => 
-//     {
-//       console.log("clicked...");
-//       try{
-//         const response = await fetch(`https://supersimplebackend.dev/orders`,
-//           {
-//               method: 'POST', 
-//               headers: {'Content-Type': 'application/json'},
-//               body: 
-//               JSON.stringify({
-//                 cart: cart
-//               })
-//           });
-//           const order = await response.json();
-//           addOrder(order);
-//       }catch(error){
-//         console.log(`Unexpected error. Try again later! ${error}`)
-//       }
-//     window.location.href = 'orders.html'
-//     });
+greetingPostFetch("Pedro");
+getToAmazonFetchAsync();
+greetingPostError();
