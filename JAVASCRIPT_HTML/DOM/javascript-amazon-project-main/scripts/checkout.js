@@ -1,8 +1,9 @@
-import {organizeCart} from '../scripts/checkout/orderSummary.js'
-import {renderPaymentSummary} from '../scripts/checkout/paymentSummary.js'
+import { organizeCart } from '../scripts/checkout/orderSummary.js'
+import { renderPaymentSummary } from '../scripts/checkout/paymentSummary.js'
 //import '../data/backend-practice.js';
 //import '../data/cart-oop.js'
-import { loadProducts,loadCart } from '../data/products.js';
+import { loadProducts } from '../data/products.js';
+import { loadCart, loadCartFetch } from '../data/cart.js'
 
 
 // Promise.all([
@@ -22,7 +23,7 @@ import { loadProducts,loadCart } from '../data/products.js';
 //             resolve('Value 2');
 //         })
 //     }).then((value) => {
-        
+
 //     })
 // ]).then((values) => {
 //     console.log("END VALUE")
@@ -55,30 +56,34 @@ import { loadProducts,loadCart } from '../data/products.js';
 
 // THIS IS A SHORTER VERSION OF THE CODE BELOW
 
-    async function loadPage()
-    {
-        console.log('load page...');
+export async function loadPage() {
+    console.log('load page...');
+    await Promise.all([
+        loadCartFetch(),
+        loadProducts()
+    ])
 
-        // WE CAN ONLY USE AWAIT WHEN WE'RE INSIDE AN ASYNC FUNCTION
-        await loadProducts();
-        const resolver = await new Promise((resolve,reject) => {
-            loadCart(() => {
-                //reject('ERROR 1')
-                resolve("FINISHED loadCart");
-                
-            })
-        });
-        console.log(`RESOLVER ${resolver}`);
+    // WE CAN ONLY USE AWAIT WHEN WE'RE INSIDE AN ASYNC FUNCTION
+    // await loadProducts();
+    // const resolver = await new Promise((resolve, reject) => {
+    //     loadCart(() => {
+    //         //reject('ERROR 1')
+    //         resolve("FINISHED loadCart");
 
-        organizeCart();
-        renderPaymentSummary();
-        return "loadPage Finished";
-    }
+    //     })
+    // });
+    // console.log(`RESOLVER ${resolver}`);
 
+    // organizeCart();
+    // renderPaymentSummary();
+    // return "loadPage Finished";
+}
 
-await loadPage().then((value) => {
-    console.log(`${value}`);
-})
+loadPage();
+
+// await loadPage().then((value) => {
+//     console.log(`${value}`);
+// })
 
 // function loadPage(){
 //     return new Promise((resolve) => {
@@ -86,7 +91,6 @@ await loadPage().then((value) => {
 //         resolve();
 //     })
 // }
-
 
 
 /*
@@ -101,3 +105,4 @@ loadProducts(() => {
 
 //organizeCart();
 //renderPaymentSummary();
+//loadCartFetch();

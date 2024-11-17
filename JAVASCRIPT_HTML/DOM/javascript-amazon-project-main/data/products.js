@@ -16,6 +16,10 @@ export class Product{
       return `images/ratings/rating-${this.rating.stars}.png`
     }
 
+    getImgUrl(){
+      return `${this.image}`
+    }
+
     getPrice(){
       return `$${(this.priceCents/100).toFixed(2)}`
     }
@@ -886,23 +890,7 @@ export function loadProducts(){
 
 
 
-export function loadCart(fun){
-  console.log("Starting loadCart function")
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET','https://supersimplebackend.dev/cart');
-  xhr.send();
 
-  xhr.addEventListener('loadend', () => 
-  {
-      console.log(xhr.response);
-      fun();
-  });
-
-  xhr.addEventListener('error', () => {
-    console.log("UNEXPECTED ERROR!!!");
-  })
-
-}
 
 
 export let productsOO = []

@@ -1,6 +1,9 @@
 import {updateCartNumber} from '../scripts/amazon.js'
 import {updateCartNumberCheckout} from '../scripts/checkout/orderSummary.js'
 import {products} from '../data/products.js'
+import { organizeCart } from '../scripts/checkout/orderSummary.js'
+import { renderPaymentSummary } from '../scripts/checkout/paymentSummary.js'
+
 
 export var cart;
 
@@ -15,7 +18,35 @@ export function loadFromStorage(){
 }
 
 
+export function loadCart(fun){
+  console.log("Starting loadCart function")
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET','https://supersimplebackend.dev/cart');
+  xhr.send();
 
+  xhr.addEventListener('loadend', () => 
+  {
+      console.log(xhr.response);
+      fun();
+  });
+
+  xhr.addEventListener('error', () => {
+    console.log("UNEXPECTED ERROR!!!");
+  })
+
+}
+
+
+
+export async function loadCartFetch(){
+  console.log("Starting loadCartFetch function")
+  const response = await fetch('https://supersimplebackend.dev/cart');
+  const text = await response.text();
+  organizeCart();
+  renderPaymentSummary();
+  console.log(`${text}`);
+  return text;
+}
 
 
 

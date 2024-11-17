@@ -1,12 +1,12 @@
 import {organizeCart} from '../../../scripts/checkout/orderSummary.js'
 import { addProductToCart,cart,cartIconAdded,saveToStorage,updateCartProduct,removeFromCart,loadFromStorage } from '../../../data/cart.js'
-
+import {loadPage} from '../../../scripts/checkout.js'
 
 describe('Test Set: organizeCart', () => 
 {
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
-    beforeEach(() => 
+    beforeEach(async () => 
     {
         document.querySelector('.js-test-container').innerHTML = `
         <div class="order-summary"> </div>
@@ -30,7 +30,7 @@ describe('Test Set: organizeCart', () =>
                             }
                         ]);
             });
-
+            
             loadFromStorage();
             organizeCart();
     })
