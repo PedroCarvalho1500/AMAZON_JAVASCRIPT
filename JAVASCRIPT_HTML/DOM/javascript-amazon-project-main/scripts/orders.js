@@ -1,6 +1,8 @@
 import {orders} from '../data/orders.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import { products_from_backend,loadProducts } from '../data/products.js'
+import {addProductToCart} from '../data/cart.js';
+import {updateCartNumber} from './amazon.js'
 
 //console.log(orders[0].orderTime);
 //const current_date = dayjs(orders[0].orderTime);
@@ -10,7 +12,8 @@ export function organizeOrders(){
     const order_container = document.querySelector(`.order-container`);
 
     
-    orders.forEach((order,index) => {
+    orders.forEach(async (order,index) => 
+    {
         const new_order_header = document.createElement(`div`);
         new_order_header.classList.add(`order-header`);
         order_container.appendChild(new_order_header);
@@ -66,11 +69,16 @@ export function organizeOrders(){
         new_order_details_grid.classList.add(`order-details-grid`);
         order_container.appendChild(new_order_details_grid);
 
-        order.products.forEach((product) => {
-            console.log(product.productId)
+        const all_products = await loadProducts();
+        const order_products = order.products
+        order_products.forEach((product,index2) => {
+            //console.log(product.productId);
+            
             const new_product_image_container = document.createElement(`div`);
             new_product_image_container.classList.add(`product-image-container`);
-            const img_url = products_from_backend.filter((current_product) => {
+            new_product_image_container.classList.add(`container-image-${order.orderId}`);
+            
+            const product_now = all_products.filter((current_product) => {
                 if(current_product.id === product.productId){
                      return true
                     } 
@@ -78,49 +86,61 @@ export function organizeOrders(){
                     return false
                 }
             });
-            console.log(img_url);
-            new_product_image_container.innerHTML = `
-            <img src="${img_url}>
-            `;
+            //console.log(product_now[0]);
+            const new_img = document.createElement(`img`);
+            new_img.setAttribute('src',product_now[0].image);
+
+            const new_product_details = document.createElement(`div`);
+            new_product_details.classList.add(`product-details`);
+            new_product_details.classList.add(`product-${index2}-${order.orderId}`);
+            const product_name = document.createElement(`div`);
+            product_name.classList.add(`product-name`);
+            product_name.innerText = `${product_now[0].name}`
+            const product_delivery = document.createElement(`div`);
+            product_delivery.classList.add(`product-delivery-date`);
+            product_delivery.innerText = `Arriving on:  ${dayjs(orders[index].products[index2].estimatedDeliveryTime).format('dddd')}`
+            const product_quantity = document.createElement(`div`);
+            product_quantity.classList.add(`product-quantity`);
+            product_quantity.innerText = `Quantity: ${orders[index].products[index2].quantity}`;
+            
 
             document.querySelectorAll(`.order-details-grid`)[index].appendChild(new_product_image_container);
+            document.querySelectorAll(`.container-image-${order.orderId}`)[index2].appendChild(new_img);
+            document.querySelectorAll(`.order-details-grid`)[index].appendChild(new_product_details);
+            document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_name);
+            document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_delivery);
+            document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_quantity);
+
+            const new_buy_it_again_bt_html = `<button class="buy-again-button button-primary data-orderproduct-id="${orders[index]}${product_now[0].productId}>
+                <img class="buy-again-icon" src="images/icons/buy-again.png">
+                <span class="buy-again-message">Buy it again</span>
+              </button>`;
+
+            const track_button_html = `<div class="product-actions">
+              <a href="tracking.html?orderId=${orders[index].orderId}&amp;productId=${product.productId}">
+                <button class="track-package-button button-secondary">
+                  Track package
+                </button>
+              </a>
+            </div>`
+
+            document.querySelector(`.product-${index2}-${order.orderId}`).innerHTML+=new_buy_it_again_bt_html;
+            document.querySelectorAll(`.order-details-grid`)[index].innerHTML+=track_button_html;
+            
+            //button.dataset.productId
+            document.querySelectorAll(`.buy-again-button`).forEach((button,index_button) => {
+                button.addEventListener(`click`, () => {
+                    //console.log(order_products[index_button])
+                    addProductToCart(order_products[index_button].productId,1);
+                    updateCartNumber();
+                })
+            })
         })
-
-
-
-        // <div class="order-details-grid">
-        // <div class="product-image-container">
-        //   <img src="images/products/athletic-cotton-socks-6-pairs.jpg">
-        // </div>
-
-        // <div class="product-details">
-        //   <div class="product-name">
-        //     Black and Gray Athletic Cotton Socks - 6 Pairs
-        //   </div>
-        //   <div class="product-delivery-date">
-        //     Arriving on: August 15
-        //   </div>
-        //   <div class="product-quantity">
-        //     Quantity: 1
-        //   </div>
-        //   <button class="buy-again-button button-primary">
-        //     <img class="buy-again-icon" src="images/icons/buy-again.png">
-        //     <span class="buy-again-message">Buy it again</span>
-        //   </button>
-        // </div>
-
-        // <div class="product-actions">
-        //   <a href="tracking.html">
-        //     <button class="track-package-button button-secondary">
-        //       Track package
-        //     </button>
-        //   </a>
-        // </div>
-
     })
 }
 
 organizeOrders();
+updateCartNumber();
 
 // [{"orderId":"c953f2ae-b88c-44a4-96bb-00df4de592a1","totalCostCents":10667,"products":
 // [{"productId":"8c9c52b5-5a19-4bcb-a5d1-158a74287c53","quantity":1,"estimatedDeliveryTime":"2024-11-24T18:26:47.219Z","variation":null},

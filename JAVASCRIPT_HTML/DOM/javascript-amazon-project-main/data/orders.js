@@ -5,7 +5,7 @@ export var orders = JSON.parse(localStorage.getItem('orders')) || [];
 
 export function addOrder(order){
     //console.log(order);
-    orders.push({
+    orders.unshift({
         orderId: order.id,
         orderTime: order.orderTime,
         totalCostCents: order.totalCostCents,

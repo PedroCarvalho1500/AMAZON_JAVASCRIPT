@@ -130,10 +130,11 @@ document.addEventListener('DOMContentLoaded', (event) =>
   {
     if(event.target.title === "Amazon Project"){
       //loadProducts(organizeProducts);
-      loadProducts().then(() => {
-        organizeProducts(products_from_backend);
-      })
-      //organizeProducts();
+      // loadProducts().then(() => {
+      //   organizeProducts(products_from_backend);
+      // })
+      loadProducts();
+      organizeProducts(products_from_backend);
       updateCartNumberOO(cart1);
 
       // document.querySelectorAll('.js-add-to-cart').forEach((button, index) => 

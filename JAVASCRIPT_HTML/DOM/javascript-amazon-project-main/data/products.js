@@ -825,17 +825,43 @@ const tshirt = new Clothing({
 
 export let products_from_backend = [];
 
+// export function loadProducts(){
+//   console.log("Starting loadProducts function")
+//   const promise1 = fetch("https://supersimplebackend.dev/products")
+//   .then((response,error) => 
+//   {
+//     return response.json();
+//   }).then((productsData) => 
+//     {
+//       productsData = products;
+//       //console.log(productsData);
+//       products_from_backend = productsData.map((productDetails) => 
+//       {
+//         if (productDetails.type === "clothing")
+//         {
+//           return new Clothing(productDetails);
+//         }
+//         else if(productDetails.type === "appliance")
+//         {
+//           return new Appliance(productDetails);
+//         }
+//         else
+//         {
+//           return new Product(productDetails);
+//         }
+//       });
+//       return productsData;
+//     }).catch((error) => {
+//       console.log(`SOMETHING WENT WRONG...`)
+//     }); 
+//   return promise1;
+// }
+
+
 export function loadProducts(){
-  console.log("Starting loadProducts function")
-  const promise1 = fetch("https://supersimplebackend.dev/products")
-  .then((response,error) => 
-  {
-    return response.json();
-  }).then((productsData) => 
+  console.log("Starting loadProducts function");
+  products_from_backend = products.map((productDetails) => 
     {
-      //console.log(productsData);
-      products_from_backend = productsData.map((productDetails) => 
-      {
         if (productDetails.type === "clothing")
         {
           return new Clothing(productDetails);
@@ -849,11 +875,7 @@ export function loadProducts(){
           return new Product(productDetails);
         }
       });
-      return productsData;
-    }).catch((error) => {
-      console.log(`SOMETHING WENT WRONG...`)
-    }); 
-  return promise1;
+      return products_from_backend;
 }
 
 

@@ -40,12 +40,12 @@ export function loadCart(fun){
 
 export async function loadCartFetch(){
   console.log("Starting loadCartFetch function")
-  const response = await fetch('https://supersimplebackend.dev/cart');
-  const text = await response.text();
+  // const response = await fetch('https://supersimplebackend.dev/cart');
+  // const text = await response.text();
   organizeCart();
   renderPaymentSummary();
-  console.log(`${text}`);
-  return text;
+  //console.log(`${text}`);
+  //return text;
 }
 
 
