@@ -98,7 +98,7 @@ export function organizeOrders(){
             product_name.innerText = `${product_now[0].name}`
             const product_delivery = document.createElement(`div`);
             product_delivery.classList.add(`product-delivery-date`);
-            product_delivery.innerText = `Arriving on:  ${dayjs(orders[index].products[index2].estimatedDeliveryTime).format('dddd')}`
+            product_delivery.innerText = `Arriving on:  ${dayjs(orders[index].products[index2].estimatedDeliveryTime).format('MMMM')} ${dayjs(orders[index].products[index2].estimatedDeliveryTime).format('D')} `
             const product_quantity = document.createElement(`div`);
             product_quantity.classList.add(`product-quantity`);
             product_quantity.innerText = `Quantity: ${orders[index].products[index2].quantity}`;
@@ -141,8 +141,3 @@ export function organizeOrders(){
 
 organizeOrders();
 updateCartNumber();
-
-// [{"orderId":"c953f2ae-b88c-44a4-96bb-00df4de592a1","totalCostCents":10667,"products":
-// [{"productId":"8c9c52b5-5a19-4bcb-a5d1-158a74287c53","quantity":1,"estimatedDeliveryTime":"2024-11-24T18:26:47.219Z","variation":null},
-// {"productId":"dd82ca78-a18b-4e2a-9250-31e67412f98d","quantity":1,"estimatedDeliveryTime":"2024-11-24T18:26:47.219Z","variation":null},
-// {"productId":"54e0eccd-8f36-462b-b68a-8182611d9add","quantity":2,"estimatedDeliveryTime":"2024-11-24T18:26:47.219Z","variation":null}]}]
