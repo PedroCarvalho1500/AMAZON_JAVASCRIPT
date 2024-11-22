@@ -42,6 +42,7 @@ export function organizeProducts(products_from_backend)
   //console.log(url.searchParams.get(`search`));
   const text_to_search = url.searchParams.get(`search`) === null ? "" : url.searchParams.get(`search`);
   const products_grid = document.querySelector('.products-grid');
+  products_grid.innerHTML = ``;
   let product_div;
   updateCartNumber();
 
@@ -56,7 +57,6 @@ export function organizeProducts(products_from_backend)
     //console.log(element.priceCents)
     if(element.keywords.includes(text_to_search.toLowerCase()) === true)
     {
-        console.log("MATCHES WITH SEARCH")
         product_div = document.createElement('div');
         product_div.className = "product-container js-products-grid"
         product_div.innerHTML = `         <div class="product-image-container">
@@ -105,18 +105,50 @@ export function organizeProducts(products_from_backend)
                   <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${element.id}">
                     Add to Cart
                   </button>`
-        products_grid.appendChild(product_div)
+        products_grid.appendChild(product_div);
+
+        //console.log(document.querySelectorAll('.js-add-to-cart').length)
+        //console.log(document.querySelectorAll('.added-to-cart').length)
     }
+
+
+
   });
+
+  // document.querySelectorAll('.js-add-to-cart').forEach((button, index) => 
+  //   {
+  //     button.addEventListener('click', () => {
+  //       console.log("CLICKED...")
+  //       var addedToCartDiv = document.querySelectorAll('.added-to-cart')[index];
+  //       cartIconAdded(addedToCartDiv);
+  //       console.log(`quantity-selector-${products[index].id}`)
+  //       var selected_value = document.querySelector(`#quantity-selector-${products[index].id}`);
+  //       console.log(selected_value);
+
+  //       const quantity_selected = parseInt(selected_value.value);
+  //       const productId = button.dataset.productId;
+
+  //       addProductToCart(productId, quantity_selected, addedToCartDiv);
+  //       //console.log(cart);
+  //       updateCartNumber();
+  //       saveToStorage();
+  //     })
+  //   });
+  addCartEvents();
+}
+
+
+export function addCartEvents(){
 
   document.querySelectorAll('.js-add-to-cart').forEach((button, index) => 
     {
       button.addEventListener('click', () => {
         console.log("CLICKED...")
         var addedToCartDiv = document.querySelectorAll('.added-to-cart')[index];
+        const productIdClicked = document.querySelectorAll(`.js-add-to-cart`)[index].dataset.productId;
+        //console.log(addedToCartDiv);
         cartIconAdded(addedToCartDiv);
-
-        var selected_value = document.querySelector(`#quantity-selector-${products[index].id}`);
+        const selected_value = document.querySelector(`#quantity-selector-${productIdClicked}`);
 
         const quantity_selected = parseInt(selected_value.value);
         const productId = button.dataset.productId;
@@ -128,6 +160,11 @@ export function organizeProducts(products_from_backend)
       })
     });
 }
+
+
+
+
+
 
 export function searchForAProduct(search_bar){
   const text_to_search = search_bar.value;

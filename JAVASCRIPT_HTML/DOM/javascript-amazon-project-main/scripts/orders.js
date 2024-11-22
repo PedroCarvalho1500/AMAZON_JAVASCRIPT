@@ -18,7 +18,7 @@ export function organizeOrders(){
         new_order_header.classList.add(`order-header`);
         order_container.appendChild(new_order_header);
         const new_order_header_element = document.querySelectorAll(`.order-header`)[index];
-
+        //console.log(order)
         const new_order_header_left = document.createElement(`div`);
         new_order_header_left.classList.add(`order-header-left-section-${order.orderId}`);
         new_order_header_element.appendChild(new_order_header_left);
@@ -68,9 +68,12 @@ export function organizeOrders(){
         const new_order_details_grid = document.createElement(`div`);
         new_order_details_grid.classList.add(`order-details-grid`);
         order_container.appendChild(new_order_details_grid);
-
-        const all_products = await loadProducts();
-        const order_products = order.products
+        const order_products = order.products;
+        //console.log(order_products);
+        //console.log(order_products);
+        const all_products = await loadProducts()
+        //all_products = all_products.filter((product) => {if(order_products.includes(product.id) === true){return true}else{return false}});
+        //console.log(all_products);
         order_products.forEach((product,index2) => {
             //console.log(product.productId);
             
@@ -110,8 +113,9 @@ export function organizeOrders(){
             document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_name);
             document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_delivery);
             document.querySelector(`.product-${index2}-${order.orderId}`).appendChild(product_quantity);
+            //console.log(product_now[0].id)
 
-            const new_buy_it_again_bt_html = `<button class="buy-again-button button-primary data-orderproduct-id="${orders[index]}${product_now[0].productId}>
+            const new_buy_it_again_bt_html = `<button class="buy-again-button button-primary buy-again-order-${orders[index].orderId} data-orderproduct-id=${orders[index].orderId}-${product_now[0].id}>
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
                 <span class="buy-again-message">Buy it again</span>
               </button>`;
@@ -128,8 +132,9 @@ export function organizeOrders(){
             document.querySelectorAll(`.order-details-grid`)[index].innerHTML+=track_button_html;
             
             //button.dataset.productId
-            document.querySelectorAll(`.buy-again-button`).forEach((button,index_button) => {
+            document.querySelectorAll(`.buy-again-order-${orders[index].orderId}`).forEach((button,index_button) => {
                 button.addEventListener(`click`, () => {
+                    console.log("CLICKED...")
                     //console.log(order_products[index_button])
                     addProductToCart(order_products[index_button].productId,1);
                     updateCartNumber();

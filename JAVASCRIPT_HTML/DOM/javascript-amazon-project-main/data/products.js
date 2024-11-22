@@ -43,7 +43,7 @@ export class Product{
 //     count: 87
 //   },
 //   priceCents: 1090,
-//   keywords: [
+//   keywords: ,
 //     "socks",
 //     "sports",
 //     "apparel"
@@ -65,6 +65,7 @@ export const products = [
     },
     priceCents: 1090,
     keywords: [
+      "",
       "socks",
       "sports",
       "apparel"
@@ -80,6 +81,7 @@ export const products = [
     },
     priceCents: 2095,
     keywords: [
+      "",
       "sports",
       "basketballs"
     ]
@@ -94,6 +96,7 @@ export const products = [
     },
     priceCents: 799,
     keywords: [
+      "",
       "tshirts",
       "apparel",
       "mens"
@@ -111,6 +114,7 @@ export const products = [
     },
     priceCents: 1899,
     keywords: [
+      "",
       "toaster",
       "kitchen",
       "appliances"
@@ -129,6 +133,7 @@ export const products = [
     },
     priceCents: 2067,
     keywords: [
+      "",
       "plates",
       "kitchen",
       "dining"
@@ -144,6 +149,7 @@ export const products = [
     },
     priceCents: 3499,
     keywords: [
+      "",
       "kitchen",
       "cookware"
     ]
@@ -158,6 +164,7 @@ export const products = [
     },
     priceCents: 2400,
     keywords: [
+      "",
       "hoodies",
       "sweaters",
       "apparel"
@@ -173,6 +180,7 @@ export const products = [
     },
     priceCents: 3599,
     keywords: [
+      "",
       "bathroom",
       "washroom",
       "restroom",
@@ -190,6 +198,7 @@ export const products = [
     },
     priceCents: 2899,
     keywords: [
+      "",
       "bathroom",
       "cleaning"
     ]
@@ -204,6 +213,7 @@ export const products = [
     },
     priceCents: 3390,
     keywords: [
+      "",
       "shoes",
       "running shoes",
       "footwear"
@@ -219,6 +229,7 @@ export const products = [
     },
     priceCents: 2070,
     keywords: [
+      "",
       "robe",
       "swimsuit",
       "swimming",
@@ -238,6 +249,7 @@ export const products = [
     },
     priceCents: 1560,
     keywords: [
+      "",
       "accessories",
       "shades"
     ]
@@ -252,6 +264,7 @@ export const products = [
     },
     priceCents: 2499,
     keywords: [
+      "",
       "footwear",
       "sandals",
       "womens",
@@ -269,6 +282,7 @@ export const products = [
     },
     priceCents: 4599,
     keywords: [
+      "",
       "bedroom",
       "curtains",
       "home"
@@ -284,6 +298,7 @@ export const products = [
     },
     priceCents: 1699,
     keywords: [
+      "",
       "shorts",
       "apparel",
       "mens"
@@ -299,6 +314,7 @@ export const products = [
     },
     priceCents: 3074,
     keywords: [
+      "",
       "water boiler",
       "appliances",
       "kitchen"
@@ -314,6 +330,7 @@ export const products = [
     },
     priceCents: 2374,
     keywords: [
+      "",
       "kleenex",
       "tissues",
       "kitchen",
@@ -331,6 +348,7 @@ export const products = [
     },
     priceCents: 2200,
     keywords: [
+      "",
       "hats",
       "straw hats",
       "summer",
@@ -347,6 +365,7 @@ export const products = [
     },
     priceCents: 1799,
     keywords: [
+      "",
       "jewelry",
       "accessories",
       "womens"
@@ -362,6 +381,7 @@ export const products = [
     },
     priceCents: 1374,
     keywords: [
+      "",
       "hooded",
       "hoodies",
       "sweaters",
@@ -381,6 +401,7 @@ export const products = [
     },
     priceCents: 1250,
     keywords: [
+      "",
       "bathmat",
       "bathroom",
       "home"
@@ -396,6 +417,7 @@ export const products = [
     },
     priceCents: 2640,
     keywords: [
+      "",
       "shoes",
       "flats",
       "womens",
@@ -412,6 +434,7 @@ export const products = [
     },
     priceCents: 1599,
     keywords: [
+      "",
       "tshirts",
       "shirts",
       "apparel",
@@ -430,6 +453,7 @@ export const products = [
     },
     priceCents: 8300,
     keywords: [
+      "",
       "garbage",
       "bins",
       "cans",
@@ -446,6 +470,7 @@ export const products = [
     },
     priceCents: 2399,
     keywords: [
+      "",
       "bedroom",
       "bed sheets",
       "sheets",
@@ -463,6 +488,7 @@ export const products = [
     },
     priceCents: 1250,
     keywords: [
+      "",
       "hats",
       "winter hats",
       "beanies",
@@ -481,6 +507,7 @@ export const products = [
     },
     priceCents: 2290,
     keywords: [
+      "",
       "pants",
       "apparel",
       "mens"
@@ -496,6 +523,7 @@ export const products = [
     },
     priceCents: 3890,
     keywords: [
+      "",
       "shoes",
       "running shoes",
       "footwear",
@@ -512,6 +540,7 @@ export const products = [
     },
     priceCents: 1690,
     keywords: [
+      "",
       "sunglasses",
       "glasses",
       "accessories",
@@ -528,6 +557,7 @@ export const products = [
     },
     priceCents: 6797,
     keywords: [
+      "",
       "cooking set",
       "kitchen"
     ]
@@ -542,6 +572,7 @@ export const products = [
     },
     priceCents: 1649,
     keywords: [
+      "",
       "bathroom",
       "washroom",
       "mirrors",
@@ -558,6 +589,7 @@ export const products = [
     },
     priceCents: 2400,
     keywords: [
+      "",
       "pants",
       "sweatpants",
       "jogging",
@@ -575,6 +607,7 @@ export const products = [
     },
     priceCents: 2400,
     keywords: [
+      "",
       "accessories",
       "womens"
     ]
@@ -589,6 +622,7 @@ export const products = [
     },
     priceCents: 2899,
     keywords: [
+      "",
       "boxes",
       "food containers",
       "kitchen"
@@ -604,6 +638,7 @@ export const products = [
     },
     priceCents: 2250,
     keywords: [
+      "",
       "coffeemakers",
       "kitchen",
       "appliances"
@@ -619,6 +654,7 @@ export const products = [
     },
     priceCents: 3099,
     keywords: [
+      "",
       "bedroom",
       "home"
     ]
@@ -633,6 +669,7 @@ export const products = [
     },
     priceCents: 2110,
     keywords: [
+      "",
       "bathroom",
       "home",
       "towels"
@@ -648,6 +685,7 @@ export const products = [
     },
     priceCents: 3390,
     keywords: [
+      "",
       "shoes",
       "running shoes",
       "footwear",
@@ -664,6 +702,7 @@ export const products = [
     },
     priceCents: 10747,
     keywords: [
+      "",
       "food blenders",
       "kitchen",
       "appliances"
@@ -679,6 +718,7 @@ export const products = [
     },
     priceCents: 3899,
     keywords: [
+      "",
       "mixing bowls",
       "baking",
       "cookware",
@@ -695,6 +735,7 @@ export const products = [
     },
     priceCents: 5799,
     keywords: [
+      "",
       "kitchen",
       "kitchen towels",
       "tissues"
@@ -710,6 +751,7 @@ export const products = [
     },
     priceCents: 2400,
     keywords: [
+      "",
       "sweaters",
       "hoodies",
       "apparel",
@@ -726,6 +768,7 @@ export const products = [
     },
     priceCents: 377990,
     keywords: [
+      "",
       "technology",
       "computers",
       "accer",
@@ -814,6 +857,7 @@ const tshirt = new Clothing({
   },
   priceCents: 1599,
   keywords: [
+    "",
     "tshirts",
     "shirts",
     "apparel",
